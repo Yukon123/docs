@@ -187,7 +187,7 @@
   
   If `flush` is set to `'sync'`, the callback will be called synchronously, as soon as the value changes.
 
-  For both `'pre'` and `'post'`, the callback is buffered using a queue(except: `'pre'` on initial run.), The callback will only be added to the queue once, even if the watched value changes multiple times. The interim values will be skipped and won't be passed to the callback.
+  For both `'pre'` and `'post'`, the callback is buffered using a queue(except: `'pre'` on initial run). The callback will only be added to the queue once, even if the watched value changes multiple times. The interim values will be skipped and won't be passed to the callback.
 
   Buffering the callback not only improves performance but also helps to ensure data consistency. The watchers won't be triggered until the code performing the data updates has finished.
 
