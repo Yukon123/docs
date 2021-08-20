@@ -183,7 +183,7 @@
 
   The value `'post'` can be used to defer the callback until after rendering. This should be used if the callback needs access to the updated DOM or child components via `$refs`.
   
-  On initial run with default `'pre'` option, the first call must happen before the component is mounted so it is called synchronously.The value `'post'`of `flush` will block the`immediate` option.
+  On initial run with default `'pre'` option, the first call must happen before the component is mounted so it is called synchronously.The value `'post'` of `flush` will block the `immediate` option.
   
   If `flush` is set to `'sync'`, the callback will be called synchronously, as soon as the value changes.
 
