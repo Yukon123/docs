@@ -135,16 +135,16 @@
 
 - **Option: immediate**
 
-  Passing in `immediate: true` in the option will trigger the callback immediately with the current value of the expression:
+  Passing in `immediate: true` in the option will trigger the callback immediately on initial run:
 
   ```js
   vm.$watch('a', callback, {
     immediate: true
   })
-  // `callback` is fired immediately with current value of `a`
+  // `callback` is trigger immediately on initial run
   ```
 
-  Note that with `immediate` option you won't be able to unwatch the given property on the first callback call.
+  Note that with `immediate` option the callback is called synchronously,therefore you won't be able to unwatch the given property on the first callback call.
 
   ```js
   // This will cause an error
@@ -182,10 +182,12 @@
   The default value is `'pre'`, which specifies that the callback should be invoked before rendering. This allows the callback to update other values before the template runs.
 
   The value `'post'` can be used to defer the callback until after rendering. This should be used if the callback needs access to the updated DOM or child components via `$refs`.
-
+  
+  On initial run with default `'pre'` option, the first call must happen before the component is mounted so it is called synchronously.The value `'post'`of `flush` will block the`immediate` option.
+  
   If `flush` is set to `'sync'`, the callback will be called synchronously, as soon as the value changes.
 
-  For both `'pre'` and `'post'`, the callback is buffered using a queue. The callback will only be added to the queue once, even if the watched value changes multiple times. The interim values will be skipped and won't be passed to the callback.
+  For both `'pre'` and `'post'`, the callback is buffered using a queue(except: `'pre'` on initial run.), The callback will only be added to the queue once, even if the watched value changes multiple times. The interim values will be skipped and won't be passed to the callback.
 
   Buffering the callback not only improves performance but also helps to ensure data consistency. The watchers won't be triggered until the code performing the data updates has finished.
 
